@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Training_project.Models.Entities
 {
+    [BsonIgnoreExtraElements]
     public class Invoice_details
     {
         [BsonId]
