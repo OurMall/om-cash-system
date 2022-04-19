@@ -13,5 +13,6 @@ namespace Training_project.Models.Entities
         public ObjectId Id { get; set; }
         public string Id_client { get; set; }
         public List<Invoice_details> Details { get; set; }
+        public double Total_price { get; set; }
     }
 }
