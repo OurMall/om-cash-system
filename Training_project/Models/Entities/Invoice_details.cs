@@ -12,6 +12,5 @@ namespace Training_project.Models.Entities
         [BsonId]
         public ObjectId Id { get; set; }
         public List<Product> Products { get; set; }
-        public double Total_price { get; set; }
     }
 }

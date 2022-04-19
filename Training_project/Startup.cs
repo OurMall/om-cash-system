@@ -13,6 +13,7 @@ namespace Training_project
 {
     public class Startup
     {
+        readonly string Cors = "MiCors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -23,8 +24,23 @@ namespace Training_project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-        }
+            /*services.AddCors(options => options.AddPolicy("AllowWebApp",
+               builder => builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod()));*/
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: Cors,
+                    builder =>
+                    {
+                        builder.WithOrigins("*");
+                    });
+            });
+
+
+                services.AddControllersWithViews();
+            }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,6 +55,8 @@ namespace Training_project
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors(Cors);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
