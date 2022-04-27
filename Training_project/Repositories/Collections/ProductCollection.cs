@@ -31,10 +31,13 @@ namespace Training_project.Repositories.Collections
             return await Collection.FindAsync(new BsonDocument()).Result.ToListAsync();
         }
 
+
         public async Task<Product> GetProductById(string id)
         {
-            return await Collection.FindAsync(
-                new BsonDocument { { "_id", new ObjectId(id) } }).Result.FirstAsync();
+            FilterDefinition<Product> query = Builders<Product>.Filter.Eq(p => p.Code, id);
+            return await Collection.FindAsync(query).Result.FirstAsync();
+            //return await Collection.FindAsync(
+               // new BsonDocument { { "_id", new ObjectId(id) } }).Result.FirstAsync();
         }
 
         public async Task InsertProduct(Product product)

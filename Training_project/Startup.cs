@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Training_project.Models.Tools;
 
 namespace Training_project
 {
@@ -38,7 +39,13 @@ namespace Training_project
             });
 
 
-                services.AddControllersWithViews();
+            /*services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new IntToStringConverter());
+                options.JsonSerializerOptions.Converters.Add(new DecimalToStringConverter());
+            });*/
+
+            services.AddControllersWithViews();
             }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
