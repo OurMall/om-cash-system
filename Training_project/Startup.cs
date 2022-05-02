@@ -39,11 +39,19 @@ namespace Training_project
             });
 
 
-            /*services.AddControllers().AddJsonOptions(options =>
+
+
+            /*
+             * Este código se utiliza en 
+             * caso de que se quiera que todos 
+             * los números que llegan desde Angular se conviertan en enteros o flotantes
+             * 
+             * services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new IntToStringConverter());
                 options.JsonSerializerOptions.Converters.Add(new DecimalToStringConverter());
-            });*/
+            });
+            */
 
             services.AddControllersWithViews();
             }

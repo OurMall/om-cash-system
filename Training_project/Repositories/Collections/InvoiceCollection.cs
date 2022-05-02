@@ -38,11 +38,8 @@ namespace Training_project.Repositories.Collections
         }
 
         public async Task InsertInvoice(Invoice invoice)
-        {
-            
-             await Collection.InsertOneAsync(invoice);
-            
-            
+        {           
+             await Collection.InsertOneAsync(invoice);   
         }
 
 

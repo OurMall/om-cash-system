@@ -32,12 +32,22 @@ namespace Training_project.Repositories.Collections
         }
 
 
-        public async Task<Product> GetProductById(string id)
+        public async Task<List<Product>> GetProductById(string id)
         {
-            FilterDefinition<Product> query = Builders<Product>.Filter.Eq(p => p.Code, id);
-            return await Collection.FindAsync(query).Result.FirstAsync();
-            //return await Collection.FindAsync(
-               // new BsonDocument { { "_id", new ObjectId(id) } }).Result.FirstAsync();
+            var query = Builders<Product>.Filter.Eq(p => p.Code, id);
+            return await Collection.FindAsync(query).Result.ToListAsync();
+            /*return await Collection.FindAsync(
+             * 
+             *             var options = new FindOptions<Product>()
+            {
+                Projection = Builders<Product>.Projection
+                .Include(p => p.Name).Include(p => p.Price).Exclude(p => p.Quantity).Exclude(p => p.Id)
+            
+            };
+
+            var result = await Collection.FindAsync(query, options);
+               new BsonDocument { { "_id", new ObjectId(id) } }).Result.FirstAsync();
+            */
         }
 
         public async Task InsertProduct(Product product)

@@ -12,6 +12,6 @@ namespace Training_project.Models.Interfaces
         Task UpdateProduct(Product product);
         Task DeleteProduct(string id);
         Task<List<Product>> GetAllProducts();
-        Task<Product> GetProductById(string id);
+        Task<List<Product>> GetProductById(string id);
     }
 }
