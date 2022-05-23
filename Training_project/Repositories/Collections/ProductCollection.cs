@@ -19,35 +19,33 @@ namespace Training_project.Repositories.Collections
             Collection = _repository.db.GetCollection<Product>("Products");
         }
 
-        public async Task DeleteProduct(string id)
+        public async Task DeleteProduct(string code)
         {
-            var filter = Builders<Product>.Filter.Eq(s => s.Id, new ObjectId(id));
+            var filter = Builders<Product>.Filter.Eq(product => product.Code, code);
             await Collection.DeleteOneAsync(filter);
 
         }
 
+            
         public async Task<List<Product>> GetAllProducts()
         {
             return await Collection.FindAsync(new BsonDocument()).Result.ToListAsync();
         }
 
 
-        public async Task<List<Product>> GetProductById(string id)
+        public async Task<List<Product>> GetProductById(string name)
         {
-            var query = Builders<Product>.Filter.Eq(p => p.Code, id);
-            return await Collection.FindAsync(query).Result.ToListAsync();
-            /*return await Collection.FindAsync(
-             * 
-             *             var options = new FindOptions<Product>()
-            {
-                Projection = Builders<Product>.Projection
-                .Include(p => p.Name).Include(p => p.Price).Exclude(p => p.Quantity).Exclude(p => p.Id)
-            
-            };
 
-            var result = await Collection.FindAsync(query, options);
-               new BsonDocument { { "_id", new ObjectId(id) } }).Result.FirstAsync();
-            */
+            try
+            {
+                var query = Builders<Product>.Filter.Eq(product => product.Name, name);
+                return await Collection.FindAsync(query).Result.ToListAsync();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Message" + e.Message);
+            }
         }
 
         public async Task InsertProduct(Product product)
@@ -60,7 +58,7 @@ namespace Training_project.Repositories.Collections
         {
             var filter = Builders<Product>
                 .Filter
-                .Eq(s => s.Id, product.Id);
+                .Eq(p => p.Code, product.Code);
 
             await Collection.ReplaceOneAsync(filter, product);
         }

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 namespace Training_project.Models.Entities
 {
     [BsonIgnoreExtraElements]
-    public class Invoice_details
+    public class Closing
     {
         [BsonId]
         public ObjectId Id { get; set; }
-        public List<Product> Products { get; set; }
+        public double Value { get; set; }
+        public DateTime Date { get; set; }
     }
 }
