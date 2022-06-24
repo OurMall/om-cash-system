@@ -12,9 +12,13 @@ namespace Training_project.Models.Entities
     {
         [BsonId]
         public ObjectId Id { get; set; }
+        public string Code { get; set; }
         public string Id_client { get; set; }
+        public string Id_workSpace { get; set; }
         public List<Product> Details { get; set; }
         public string Payment_method { get; set; }
         public double Total_price { get; set; }
+        public double Total_vat { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }
